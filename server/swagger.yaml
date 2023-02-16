@@ -1,0 +1,67 @@
+tags:
+  - name: user
+    description: user API
+
+paths:
+  # [POST] users/register
+  /users/register:
+    post:
+      tags:
+        - user
+      summary: Register User (Admin)
+      parameters:
+        - in: body
+          name: body
+          description: The user to register.
+          schema:
+            $ref: '#/definitions/userRegister'
+      responses:
+        201:
+          description: 'Created'
+        400:
+          description: 'Bad Request'
+        500:
+          description: 'Server Error'
+  # [GET] users
+  /users:
+    get:
+      tags:
+        - user
+      summary: Get all users (Admin)
+      parameters:
+        - in: query
+          name: page
+          schema:
+            type: integer
+          description: Pagination page
+        - in: query
+          name: per_page
+          schema:
+            type: integer
+          description: Pagination items per page
+      responses:
+        200:
+          description: 'OK'
+        500:
+          description: 'Server Error'
+
+
+# definitions
+definitions:
+  userRegister:
+    type: object
+    required:
+      - email
+    optional:
+      - isAdmin
+    properties:
+      email:
+        type: string
+        description: user Email
+      isAdmin:
+        type: boolean
+        description: user is admin
+
+schemes:
+ - https
+ - http

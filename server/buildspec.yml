@@ -1,0 +1,19 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: latest
+    commands:
+      - npm install -g yarn typescript
+      - cd server
+      - yarn install
+  build:
+    commands:
+      - yarn build
+
+artifacts:
+  files:
+    - '**/*'
+  base-directory: server
+  discard-paths: no
